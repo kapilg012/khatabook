@@ -39,7 +39,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     for (var item in _items) {
       if (item['isCashIn'] == true) {
         totalIn = totalIn + int.parse(item['amount']);
-      } else {
+      } else{
         totalOut = totalOut + int.parse(item['amount']);
       }
       totalAmount = totalIn - totalOut;
