@@ -24,33 +24,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GoRouter route = GoRouter(
-      routes: [
-        GoRoute(
-          path: '/',
-          builder: (BuildContext context, GoRouterState state) =>
-              new DashBoardScreen(),
-        ),
-        GoRoute(
-          name: addClientRoute,
-          path: '/add-client',
-          pageBuilder: (BuildContext context, GoRouterState state) =>
-              MaterialPage(
-            child: AddClientScreen(Future.delayed(Duration(seconds: 0)),
-                index: state.extra as int?),
-          ),
-        ),
-      ],
-    );
-
-    return MaterialApp.router(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: AppColors.primaryColor,
       ),
-      routeInformationProvider: route.routeInformationProvider,
-      routeInformationParser: route.routeInformationParser,
-      routerDelegate: route.routerDelegate,
+      home: DashBoardScreen(),
     );
   }
 }

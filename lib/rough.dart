@@ -26,7 +26,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   String addNotesImage = 'assets/add_notes.svg';
 
   Future _getAllDate() async {
-    _items = await _box.keys.map((e) => _box.get(e)).toList();
+    _items = _box.keys.map((e) => _box.get(e)).toList();
     setState(() {
       _items = _items;
     });
@@ -65,7 +65,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _getAllDate();
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
@@ -215,7 +214,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                   onPressed: () => Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => AddClientScreen(_getAllDate(),
+                                      builder: (context) => AddClientScreen(
                                         index: element['key'],
                                       ),
                                     ),
@@ -364,15 +363,13 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               height: 200,
             )),
       floatingActionButton: FloatingActionButton(
-        onPressed: ()  {
-           Navigator.push(
+        onPressed: () {
+          Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>  AddClientScreen(_getAllDate()),
+              builder: (context) => const AddClientScreen(),
             ),
-          );
-
-
+          ).then((value) => _getAllDate());
         },
         tooltip: 'Add Client',
         child: const Icon(Icons.add),

@@ -13,10 +13,8 @@ import 'package:go_router/go_router.dart';
 
 class AddClientScreen extends StatefulWidget {
   final int? index;
-  Future<dynamic> fx;
 
-  AddClientScreen(
-    this.fx, {
+  const AddClientScreen({
     Key? key,
     this.index,
   }) : super(key: key);
@@ -246,7 +244,7 @@ class _AddClientScreenState extends State<AddClientScreen> {
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         minimumSize: const size.Size(double.infinity, 50)),
-                    onPressed: () async {
+                    onPressed: () {
                       if (formkey.currentState!.validate()) {
                         if (widget.index == null) {
                           _addClient({
@@ -263,9 +261,11 @@ class _AddClientScreenState extends State<AddClientScreen> {
                               content: Text(AppText.clientAddedText),
                             ),
                           );
-                         // widget.fx;
                           // Navigator.pop(context);
-                         context.widget;
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (ctx) {
+                            return DashBoardScreen();
+                          }));
                         } else {
                           _updateClient({
                             "key": widget.index!,
@@ -281,9 +281,10 @@ class _AddClientScreenState extends State<AddClientScreen> {
                               content: Text(AppText.clientEditedText),
                             ),
                           );
-                          widget.fx;
-                          //Navigator.pop(context);
-                          context.go('/');
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (ctx) {
+                            return DashBoardScreen();
+                          }));
                         }
                       }
                     },

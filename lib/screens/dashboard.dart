@@ -11,6 +11,8 @@ import 'package:intl/intl.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
 import 'package:go_router/go_router.dart';
 
+import 'add_client_screen.dart';
+
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({Key? key}) : super(key: key);
 
@@ -39,7 +41,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     for (var item in _items) {
       if (item['isCashIn'] == true) {
         totalIn = totalIn + int.parse(item['amount']);
-      } else{
+      } else {
         totalOut = totalOut + int.parse(item['amount']);
       }
       totalAmount = totalIn - totalOut;
@@ -81,7 +83,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               child: Column(
                 children: [
                   Card(
-                    margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
@@ -117,9 +120,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: const [
-                                  Text(AppText.totalInText, style: TextStyle(fontSize: 16)),
+                                  Text(AppText.totalInText,
+                                      style: TextStyle(fontSize: 16)),
                                   SizedBox(height: 10),
-                                  Text(AppText.totalOutText, style: TextStyle(fontSize: 16)),
+                                  Text(AppText.totalOutText,
+                                      style: TextStyle(fontSize: 16)),
                                 ],
                               ),
                               Column(
@@ -127,12 +132,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                 children: [
                                   Text(
                                     totalIn.toString(),
-                                    style: const TextStyle(color: AppColors.greenColor),
+                                    style: const TextStyle(
+                                        color: AppColors.greenColor),
                                   ),
                                   const SizedBox(height: 10),
                                   Text(
                                     totalOut.toString(),
-                                    style: const TextStyle(color: AppColors.redColor),
+                                    style: const TextStyle(
+                                        color: AppColors.redColor),
                                   ),
                                 ],
                               ),
@@ -150,62 +157,85 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: _items.length,
                     itemBuilder: (context, index) {
-                      var date = DateFormat('dd/MM/yyyy').format(_items[index]['date']);
+                      var date = DateFormat('dd/MM/yyyy')
+                          .format(_items[index]['date']);
                       return StickyHeader(
                         controller: _scrollController,
                         header: index >= 1
-                            ? DateFormat('dd/MM/yyyy').format(_items[index]['date']) !=
-                                    DateFormat('dd/MM/yyyy').format(_items[index - 1]['date'])
+                            ? DateFormat('dd/MM/yyyy')
+                                        .format(_items[index]['date']) !=
+                                    DateFormat('dd/MM/yyyy')
+                                        .format(_items[index - 1]['date'])
                                 ? Container(
                                     height: 30.0,
                                     color: AppColors.backgroundColor,
-                                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0),
                                     alignment: Alignment.centerLeft,
                                     child: Text(
                                       date,
-                                      style: const TextStyle(color: AppColors.darkgreyColor, fontWeight: FontWeight.w500),
+                                      style: const TextStyle(
+                                          color: AppColors.darkgreyColor,
+                                          fontWeight: FontWeight.w500),
                                     ),
                                   )
                                 : Container()
                             : Container(
                                 height: 30.0,
                                 color: AppColors.backgroundColor,
-                                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0),
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   date,
-                                  style: const TextStyle(color: AppColors.darkgreyColor, fontWeight: FontWeight.w500),
+                                  style: const TextStyle(
+                                      color: AppColors.darkgreyColor,
+                                      fontWeight: FontWeight.w500),
                                 ),
                               ),
                         content: Card(
-                          margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 4),
                           elevation: 0,
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
+                                padding: const EdgeInsets.only(
+                                    left: 8, right: 8, top: 8),
                                 child: CircleAvatar(
-                                  backgroundImage: _items[index]['image'] != null ? FileImage(File(_items[index]['image'])) : null,
-                                  child: _items[index]['image'] != null ? null : const Icon(Icons.person),
+                                  backgroundImage: _items[index]['image'] !=
+                                          null
+                                      ? FileImage(File(_items[index]['image']))
+                                      : null,
+                                  child: _items[index]['image'] != null
+                                      ? null
+                                      : const Icon(Icons.person),
                                 ),
                               ),
                               const SizedBox(width: 16.0),
                               Expanded(
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
+                                  padding: const EdgeInsets.only(
+                                      left: 8, right: 8, top: 8),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         _items[index]['name'],
-                                        style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                                        style: const TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                       const SizedBox(height: 5),
                                       Text(
                                         _items[index]['amount'].toString(),
                                         style: TextStyle(
-                                            fontSize: 15, color: _items[index]['isCashIn'] ? AppColors.greenColor : AppColors.redColor),
+                                            fontSize: 15,
+                                            color: _items[index]['isCashIn']
+                                                ? AppColors.greenColor
+                                                : AppColors.redColor),
                                       ),
                                       // Text(
                                       //   date,
@@ -213,7 +243,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                       //   style: const TextStyle(fontSize: 14, color: AppColors.greyColor),
                                       // ),
                                       const SizedBox(height: 5),
-                                      _items[index]['description'] != "" && _items[index]['description'] != null
+                                      _items[index]['description'] != "" &&
+                                              _items[index]['description'] !=
+                                                  null
                                           ? Text(
                                               _items[index]['description'],
                                               maxLines: 1,
@@ -232,20 +264,25 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   IconButton(
-                                    constraints: const BoxConstraints(minWidth: 0, minHeight: 0),
-                                    icon: const Icon(Icons.edit, color: AppColors.greyColor),
+                                    constraints: const BoxConstraints(
+                                        minWidth: 0, minHeight: 0),
+                                    icon: const Icon(Icons.edit,
+                                        color: AppColors.greyColor),
                                     onPressed: () => context.push(
                                       '/addClient',
                                       extra: index,
                                     ),
                                   ),
                                   IconButton(
-                                    constraints: const BoxConstraints(minWidth: 0, minHeight: 0),
-                                    icon: const Icon(Icons.delete, color: AppColors.redColor),
+                                    constraints: const BoxConstraints(
+                                        minWidth: 0, minHeight: 0),
+                                    icon: const Icon(Icons.delete,
+                                        color: AppColors.redColor),
                                     onPressed: () => showDialog(
                                       context: context,
                                       builder: (context) => AlertDialog(
-                                        title: const Text(AppText.areYouSureText),
+                                        title:
+                                            const Text(AppText.areYouSureText),
                                         actions: [
                                           TextButton(
                                             child: const Text(AppText.yesText),
@@ -257,7 +294,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                           ),
                                           TextButton(
                                             child: const Text(AppText.noText),
-                                            onPressed: () => Navigator.pop(context),
+                                            onPressed: () =>
+                                                Navigator.pop(context),
                                             // onPressed: () => context.pop(),
                                           ),
                                         ],
@@ -282,13 +320,12 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.pushNamed(addClientRoute);
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => const AddClientScreen(),
-          //   ),
-          // ).then((value) => _getAllDate());
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AddClientScreen(),
+            ),
+          ).then((value) => _getAllDate());
         },
         tooltip: 'Add Client',
         child: const Icon(Icons.add),

@@ -2,7 +2,7 @@
     package="com.example.hive_example_khatabook">
     <uses-permission android:name="android.permission.CAMERA" />
    <application
-        android:label="hive_example_khatabook"
+        android:label="Khatabook"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
