@@ -261,11 +261,11 @@ class _AddClientScreenState extends State<AddClientScreen> {
                               content: Text(AppText.clientAddedText),
                             ),
                           );
-                          // Navigator.pop(context);
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (ctx) {
+                           Navigator.pop(context);
+                          /*Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (ctx) {
                             return DashBoardScreen();
-                          }));
+                          }));*/
                         } else {
                           _updateClient({
                             "key": widget.index!,
@@ -281,10 +281,11 @@ class _AddClientScreenState extends State<AddClientScreen> {
                               content: Text(AppText.clientEditedText),
                             ),
                           );
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (ctx) {
+                          Navigator.pop(context);
+                          /*Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (ctx) {
                             return DashBoardScreen();
-                          }));
+                          }));*/
                         }
                       }
                     },

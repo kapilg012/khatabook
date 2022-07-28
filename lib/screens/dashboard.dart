@@ -79,86 +79,86 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         title: const Text('Dashboard'),
       ),
       body: _items.isNotEmpty
-          ? SingleChildScrollView(
-              child: Column(
-                children: [
-                  Card(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                AppText.netAmountText,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+          ? Column(
+              children: [
+                Card(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              AppText.netAmountText,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              totalAmount.toString(),
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: totalAmount > 0
+                                    ? AppColors.greenColor
+                                    : totalAmount < 0
+                                        ? AppColors.redColor
+                                        : AppColors.blackColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Divider(thickness: 1),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                Text(AppText.totalInText,
+                                    style: TextStyle(fontSize: 16)),
+                                SizedBox(height: 10),
+                                Text(AppText.totalOutText,
+                                    style: TextStyle(fontSize: 16)),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  totalIn.toString(),
+                                  style: const TextStyle(
+                                      color: AppColors.greenColor),
                                 ),
-                              ),
-                              Text(
-                                totalAmount.toString(),
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: totalAmount > 0
-                                      ? AppColors.greenColor
-                                      : totalAmount < 0
-                                          ? AppColors.redColor
-                                          : AppColors.blackColor,
+                                const SizedBox(height: 10),
+                                Text(
+                                  totalOut.toString(),
+                                  style: const TextStyle(
+                                      color: AppColors.redColor),
                                 ),
-                              ),
-                            ],
-                          ),
-                          const Divider(thickness: 1),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  Text(AppText.totalInText,
-                                      style: TextStyle(fontSize: 16)),
-                                  SizedBox(height: 10),
-                                  Text(AppText.totalOutText,
-                                      style: TextStyle(fontSize: 16)),
-                                ],
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    totalIn.toString(),
-                                    style: const TextStyle(
-                                        color: AppColors.greenColor),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Text(
-                                    totalOut.toString(),
-                                    style: const TextStyle(
-                                        color: AppColors.redColor),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 15),
-                  ListView.builder(
+                ),
+                const SizedBox(height: 15),
+                Expanded(
+                  child: ListView.builder(
                     primary: _scrollController == null,
                     shrinkWrap: true,
                     controller: _scrollController,
-                    physics: const NeverScrollableScrollPhysics(),
+                    //physics: const NeverScrollableScrollPhysics(),
                     itemCount: _items.length,
                     itemBuilder: (context, index) {
-                      var date = DateFormat('dd/MM/yyyy')
-                          .format(_items[index]['date']);
+                      var date =
+                          DateFormat('dd/MM/yyyy').format(_items[index]['date']);
                       return StickyHeader(
                         controller: _scrollController,
                         header: index >= 1
@@ -183,8 +183,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                             : Container(
                                 height: 30.0,
                                 color: AppColors.backgroundColor,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16.0),
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   date,
@@ -204,8 +204,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                 padding: const EdgeInsets.only(
                                     left: 8, right: 8, top: 8),
                                 child: CircleAvatar(
-                                  backgroundImage: _items[index]['image'] !=
-                                          null
+                                  backgroundImage: _items[index]['image'] != null
                                       ? FileImage(File(_items[index]['image']))
                                       : null,
                                   child: _items[index]['image'] != null
@@ -219,8 +218,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                   padding: const EdgeInsets.only(
                                       left: 8, right: 8, top: 8),
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         _items[index]['name'],
@@ -244,8 +242,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                       // ),
                                       const SizedBox(height: 5),
                                       _items[index]['description'] != "" &&
-                                              _items[index]['description'] !=
-                                                  null
+                                              _items[index]['description'] != null
                                           ? Text(
                                               _items[index]['description'],
                                               maxLines: 1,
@@ -281,8 +278,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                     onPressed: () => showDialog(
                                       context: context,
                                       builder: (context) => AlertDialog(
-                                        title:
-                                            const Text(AppText.areYouSureText),
+                                        title: const Text(AppText.areYouSureText),
                                         actions: [
                                           TextButton(
                                             child: const Text(AppText.yesText),
@@ -310,25 +306,28 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       );
                     },
                   ),
-                ],
-              ),
+                ),
+              ],
             )
           : Center(
               child: SvgPicture.asset(
               addNotesImage,
               height: 200,
             )),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const AddClientScreen(),
-            ),
-          ).then((value) => _getAllDate());
-        },
-        tooltip: 'Add Client',
-        child: const Icon(Icons.add),
+      floatingActionButton: Container(
+        margin: EdgeInsets.only(right: 150),
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AddClientScreen(),
+              ),
+            ).then((value) => _getAllDate());
+          },
+          tooltip: 'Add Client',
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }
